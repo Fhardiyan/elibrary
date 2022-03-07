@@ -22,6 +22,11 @@
             form.fotobuku.focus();
             return(false);
         }
+        if (form.buku.value=="") {
+            alert("Buku Tidak Boleh Kosong");
+            form.buku.focus();
+            return(false);
+        }
 
         return(true);
     }
@@ -35,7 +40,7 @@
     <div class="row">
         <div class="col-md-12">
             <form method="POST" enctype="multipart/form-data" onsubmit="return validasi(this)" >
-<div class="form-group">
+    <div class="form-group">
                     <label>Judul</label>
                     <input class="form-control" name="judul" id="judul" />
                     
@@ -64,6 +69,11 @@
                     <label>ISBN</label>
                     <input class="form-control" name="isbn" id="isbn" />
                     
+                </div>
+
+                <div class="form-group">
+                    <label>Berkas Buku</label>
+                        <input type="file" name="buku" id="buku">
                 </div>
 
                 <div class="form-group">
@@ -104,11 +114,24 @@
     $penerbit = $_POST ['penerbit'];
     $kategori = $_POST ['kategori'];
     $isbn = $_POST ['isbn'];
+
+//foto cover
+    $fotobuku = $_FILES['fotobuku']['name'];
+    $lokasicover = $_FILES['fotobuku']['tmp_name'];
+    $uploadfc = move_uploaded_file($lokasicover, "upload/".$fotobuku);
+
+//buku pdf
+    $buku = $_FILES['buku']['name'];
+    $lokasibuku = $_FILES['buku']['tmp_name'];
+    $uploadbk = move_uploaded_file($lokasibuku, "buku/".$buku);
+
     $lokasi = $_POST ['lokasi'];
     $simpan = $_POST ['simpan'];
 
     if ($simpan) {
-        $sql = $koneksi->query("insert into tb_buku (judul, pengarang, penerbit, kategori, isbn, lokasi, fotobuku)values('$judul', '$pengarang', '$penerbit', '$kategori', '$isbn', '$lokasi', '$fotobuku')");
+         if ($uploadfc) {
+            if ($uploadbk) {
+        $sql = $koneksi->query("insert into tb_buku (judul, pengarang, penerbit, kategori, isbn, lokasi, fotobuku, buku)values('$judul', '$pengarang', '$penerbit', '$kategori', '$isbn', '$lokasi', '$fotobuku', '$buku')");
                 
             ?>
                 <script type="text/javascript">
@@ -118,8 +141,9 @@
 
                 </script>
             <?php        
-
+        }
      }
+ }
 
  ?>
         

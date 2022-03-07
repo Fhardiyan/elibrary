@@ -38,7 +38,7 @@
 
                                     <tr>
                                         <td><?php echo $no++; ?></td>
-                                        <td> <img src="images/<?php echo  $data['fotobuku'];?>" width="75" height="50"> </td>
+                                        <td> <img src="upload/<?php echo  $data['fotobuku'];?>" width="75" height="50"> </td>
                                         <td><?php echo $data['judul'];?></td>
                                         <td><?php echo $data['pengarang'];?></td>
                                         <td><?php echo $data['penerbit'];?></td>
