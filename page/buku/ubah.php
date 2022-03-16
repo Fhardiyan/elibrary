@@ -6,9 +6,6 @@
 
 	$tampil = $sql->fetch_assoc();
 
-	$tahun2 = $tampil['kategori'];
-
-	$lokasi = $tampil['lokasi'];
 ?>
 
 <div class="panel panel-default">
@@ -18,8 +15,7 @@
 <div class="panel-body">
     <div class="row">
         <div class="col-md-12">
-            
-            <form method="POST" >
+            <form method="POST" enctype="multipart/form-data" onsubmit="return validasi(this)" >
                 <div class="form-group">
                     <label>Judul</label>
                     <input class="form-control" name="judul" value="<?php echo $tampil['judul'];?>" />
@@ -50,9 +46,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Jumlah Buku</label>
-                    <input class="form-control" type="number" name="jumlah" value="<?php echo $tampil['jumlah_buku'];?>" />
-                    
+                    <label>Berkas Buku</label><br>
+                      <label><a href='buku/<?php echo $tampil['buku'] ?>'><img src='buku/logopdf.png' width="90" height="75"></a></label>                   
+                </div>
+                <div class="form-group">
+                     <label>Ganti Berkas Buku</label>
+                     <input type="file" name="buku" id="buku" />
+                </div>
+
+                <div class="form-group">
+                      <label>Foto Cover Buku</label><br>
+                      <label><img src='upload/<?php echo $tampil['fotobuku'] ?>' width="100" height="75"></label>                           
+                </div>
+                <div class="form-group">
+                     <label>Ganti Cover Buku</label>
+                     <input type="file" name="fotobuku" id="fotobuku" />
                 </div>
 
                 <div class="form-group">
@@ -86,32 +94,60 @@
  	$judul = $_POST ['judul'];
  	$pengarang = $_POST ['pengarang'];
  	$penerbit = $_POST ['penerbit'];
- 	$tahun = $_POST ['tahun'];
+ 	$kategori = $_POST ['kategori'];
  	$isbn = $_POST ['isbn'];
- 	$jumlah = $_POST ['jumlah'];
- 	$lokasi = $_POST ['lokasi'];
 
+//foto cover
+    $fotobuku = $_FILES['fotobuku']['name'];
+    $lokasicover = $_FILES['fotobuku']['tmp_name'];
+
+//buku pdf
+    $buku = $_FILES['buku']['name'];
+    $lokasibuku = $_FILES['buku']['tmp_name'];
+
+ 	$lokasi = $_POST ['lokasi'];
  	$simpan = $_POST ['simpan'];
 
 
- 	if ($simpan) {
- 		
- 		$sql = $koneksi->query("update tb_buku set judul='$judul', pengarang='$pengarang', penerbit='$penerbit', kategori='$tahun', isbn='$isbn', jumlah_buku='$jumlah', lokasi='$lokasi'
-            where id_buku='$id_buku'");
+ if ($simpan) {
+        if (!empty($lokasicover)) {
+           
+        $uploadfc = move_uploaded_file($lokasicover, "upload/".$fotobuku);
+               
+        if (!empty($lokasibuku)) {
+          
+        $uploadbk = move_uploaded_file($lokasibuku, "buku/".$buku);
 
- 		if ($sql) {
- 			?>
- 				<script type="text/javascript">
- 					
- 					alert ("Ubah Berhasil Disimpan");
- 					window.location.href="?page=buku";
+            $sql = $koneksi->query("update tb_buku set judul='$judul', pengarang='$pengarang', penerbit='$penerbit', kategori='$kategori', isbn='$isbn', buku='$buku', fotobuku='$fotobuku', lokasi='$lokasi' where id_buku='$id_buku'");
 
- 				</script>
- 			<?php
- 		}
- 	}
+        
+            ?>
+                <script type="text/javascript">
+                    
+                    alert ("Data Berhasil Diubah");
+                    window.location.href="?page=buku";
 
- ?>
-                             
-                             
+                </script>
+            <?php
+        
+    }
+}
+
+    else{
+        $sql = $koneksi->query("update tb_buku set judul='$judul', pengarang='$pengarang', penerbit='$penerbit', kategori='$kategori', isbn='$isbn', lokasi='$lokasi' where id_buku='$id_buku'");
+
+        
+            ?>
+                <script type="text/javascript">
+                    
+                    alert ("Data Berhasil Diubah");
+                    window.location.href="?page=buku";
+
+                </script>
+            <?php
+    }
+
+     }
+
+ ?>               
 

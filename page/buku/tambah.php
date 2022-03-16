@@ -73,12 +73,12 @@
 
                 <div class="form-group">
                     <label>Berkas Buku</label>
-                        <input type="file" name="buku" id="buku">
+                        <input type="file" name="buku" id="buku" accept=".pdf">
                 </div>
 
                 <div class="form-group">
                     <label>Foto Cover Buku</label>
-                        <input type="file" name="fotobuku" id="fotobuku">
+                        <input type="file" name="fotobuku" id="fotobuku" accept="image/.jpg, .png, .jpeg">
                 </div>
 
                 <div class="form-group">

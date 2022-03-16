@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2022 at 07:25 AM
+-- Generation Time: Mar 16, 2022 at 11:14 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -73,7 +73,7 @@ CREATE TABLE `tb_buku` (
 
 INSERT INTO `tb_buku` (`id_buku`, `judul`, `pengarang`, `penerbit`, `kategori`, `isbn`, `lokasi`, `fotobuku`, `buku`, `tgl_input`) VALUES
 (42, 'tes', 'tes', 'tes', 'tes', '123123123', 'Rak 2', 'vector-polisi-png-0.png', 'CamScanner 01-03-2022 11.07.pdf', '2022-03-07 06:23:58'),
-(41, 'buku', 'buku', 'buku', 'buku', '123123123123123', 'Rak 1', '123-1234122_download-png-free-shield-vector-white-shield-vector.png', '', '2022-03-07 05:04:19');
+(41, 'bukuubah21', 'bukuubah21', 'bukuubah21', 'bukuubah21', '1234567890123140', 'Rak 3', 'budget.png', 'CamScanner 01-07-2022 11.07.pdf', '2022-03-16 09:22:09');
 
 -- --------------------------------------------------------
 
