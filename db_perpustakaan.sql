@@ -1,22 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2022 at 11:14 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- Generation Time: 07 Agu 2019 pada 13.29
+-- Versi Server: 10.1.9-MariaDB
+-- PHP Version: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `db_perpustakaan`
@@ -25,7 +18,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_anggota`
+-- Struktur dari tabel `tb_anggota`
 --
 
 CREATE TABLE `tb_anggota` (
@@ -34,12 +27,12 @@ CREATE TABLE `tb_anggota` (
   `tempat_lahir` varchar(100) COLLATE latin1_general_ci NOT NULL,
   `tgl_lahir` date NOT NULL,
   `jk` enum('l','p') COLLATE latin1_general_ci NOT NULL,
-  `jabatan` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `tgl_input` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `jabatan` enum('I','II','III','IV','V','VI') COLLATE latin1_general_ci NOT NULL,
+  `tgl_input` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `tb_anggota`
+-- Dumping data untuk tabel `tb_anggota`
 --
 
 INSERT INTO `tb_anggota` (`nosis`, `nama`, `tempat_lahir`, `tgl_lahir`, `jk`, `jabatan`, `tgl_input`) VALUES
@@ -51,7 +44,7 @@ INSERT INTO `tb_anggota` (`nosis`, `nama`, `tempat_lahir`, `tgl_lahir`, `jk`, `j
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_buku`
+-- Struktur dari tabel `tb_buku`
 --
 
 CREATE TABLE `tb_buku` (
@@ -59,26 +52,15 @@ CREATE TABLE `tb_buku` (
   `judul` varchar(200) COLLATE latin1_general_ci NOT NULL,
   `pengarang` varchar(100) COLLATE latin1_general_ci NOT NULL,
   `penerbit` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `kategori` varchar(200) COLLATE latin1_general_ci NOT NULL,
+  `kategori` varchar(4) COLLATE latin1_general_ci NOT NULL,
   `isbn` varchar(25) COLLATE latin1_general_ci NOT NULL,
-  `lokasi` varchar(50) COLLATE latin1_general_ci NOT NULL,
-  `fotobuku` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
   `buku` varchar(200) COLLATE latin1_general_ci NOT NULL,
-  `tgl_input` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fotobuku` varchar(250) COLLATE latin1_general_ci NOT NULL,
+  `lokasi` varchar(50) COLLATE latin1_general_ci NOT NULL,
+  `tgl_input` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
 --
--- Dumping data for table `tb_buku`
---
-
-INSERT INTO `tb_buku` (`id_buku`, `judul`, `pengarang`, `penerbit`, `kategori`, `isbn`, `lokasi`, `fotobuku`, `buku`, `tgl_input`) VALUES
-(42, 'tes', 'tes', 'tes', 'tes', '123123123', 'Rak 2', 'vector-polisi-png-0.png', 'CamScanner 01-03-2022 11.07.pdf', '2022-03-07 06:23:58'),
-(41, 'bukuubah21', 'bukuubah21', 'bukuubah21', 'bukuubah21', '1234567890123140', 'Rak 3', 'budget.png', 'CamScanner 01-07-2022 11.07.pdf', '2022-03-16 09:22:09');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_lokasi`
+-- Struktur dari tabel `tb_lokasi`
 --
 
 CREATE TABLE `tb_lokasi` (
@@ -87,7 +69,7 @@ CREATE TABLE `tb_lokasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_lokasi`
+-- Dumping data untuk tabel `tb_lokasi`
 --
 
 INSERT INTO `tb_lokasi` (`id_lokasi`, `lokasi`) VALUES
@@ -98,33 +80,33 @@ INSERT INTO `tb_lokasi` (`id_lokasi`, `lokasi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_transaksi`
+-- Struktur dari tabel `tb_transaksi`
 --
 
 CREATE TABLE `tb_transaksi` (
   `id` int(11) NOT NULL,
   `id_buku` int(11) NOT NULL,
   `judul` varchar(200) COLLATE latin1_general_ci NOT NULL,
-  `nis` int(11) NOT NULL,
+  `nosis` int(11) NOT NULL,
   `nama` varchar(200) COLLATE latin1_general_ci NOT NULL,
   `tgl_pinjam` varchar(30) COLLATE latin1_general_ci NOT NULL,
   `tgl_kembali` varchar(30) COLLATE latin1_general_ci NOT NULL,
   `status` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `tgl_input` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `tgl_input` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `tb_transaksi`
+-- Dumping data untuk tabel `tb_transaksi`
 --
 
-INSERT INTO `tb_transaksi` (`id`, `id_buku`, `judul`, `nis`, `nama`, `tgl_pinjam`, `tgl_kembali`, `status`, `tgl_input`) VALUES
+INSERT INTO `tb_transaksi` (`id`, `id_buku`, `judul`, `nosis`, `nama`, `tgl_pinjam`, `tgl_kembali`, `status`, `tgl_input`) VALUES
 (379, 27, 'Bahasa Indonesia', 2016210004, 'Narti', '02-08-2019', '01-08-2020', 'Pinjam', '2019-08-02 12:10:18'),
 (377, 27, 'Bahasa Indonesia', 2016210002, 'Putri Mawar', '02-08-2019', '01-08-2020', 'Pinjam', '2019-08-02 12:07:59');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -137,15 +119,14 @@ CREATE TABLE `tb_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id`, `username`, `password`, `nama`, `level`, `foto`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin', 'My-Account-Icon.jpg'),
 (2, 'user', 'user', 'user', 'user', 'login.png'),
 (11, 'narti', 'narti', 'Narti', 'user', 'My-Account-Icon.jpg'),
-(10, 'nurul', 'nurul', 'Nurul Husnul', 'admin', 'My-Account-Icon.jpg'),
-(12, 'adminas', 'adminas', 'Bakpia', 'admin', 'PRODIKLAT.png');
+(10, 'nurul', 'nurul', 'Nurul Husnul', 'admin', 'My-Account-Icon.jpg');
 
 --
 -- Indexes for dumped tables
@@ -190,27 +171,22 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_buku`
 --
 ALTER TABLE `tb_buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
-
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `tb_lokasi`
 --
 ALTER TABLE `tb_lokasi`
   MODIFY `id_lokasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=380;
-
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-COMMIT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

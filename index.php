@@ -48,10 +48,7 @@ font-size: 16px;"><?php echo date('d-M-Y'); ?> &nbsp; <a href="logout.php" class
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-				
-				
-					
+                <ul class="nav" id="main-menu">					
                     <li>
                         <a  href="index.php"><i class="fa fa-dashboard fa-2x"></i> Dashboard</a>
                     </li>
