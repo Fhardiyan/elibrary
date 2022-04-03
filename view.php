@@ -1,7 +1,8 @@
 <?php
     $koneksi = new mysqli("localhost","root","","db_perpustakaan");
-    $sql = $koneksi->query("select * from tb_buku");
+    $sql = $koneksi->query("select * from tb_buku");    
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,95 +12,124 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Elibrary SPN POLDA JATIM</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/product/">
     <!-- Bootstrap core CSS -->
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/product.css" rel="stylesheet">
             <!-- W3 STYLES-->
-   <link rel="stylesheet" href="assets/css/w3.css">
+   <link href="assets/css/w3.css"rel="stylesheet">
+   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2020.css">
+       <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
   </head>
 
   <body>
 <header class="site-header sticky-top py-1">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
       <img src="images/lambang-spn.png" width="50" height="50" class="center logo">
-      <h2 style="color:white;">PERPUSTAKAAN DIGITAL SPN POLDA JATIM</h2>
-        <button type="button" class="btn btn-primary" data-toggle="collapse">SEARCH</button>
-        <div class="collapse">
-          <div class="card card-body">
-<section>
-  <div class="bg-image h-100" style="background-color: #F5DF4D;">
-    <div class="mask d-flex align-items-center h-100">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <div class="card mb-2">
-              <div class="card-body d-flex justify-content-between py-2">
-                <div class="input-group input-group-lg">
-                  <span class="input-group-text border-0 px-1" id="basic-addon2"><i class="fas fa-search fa-lg" style="color: #939597;"></i></span>
-                  <input type="text" class="form-control form-control-lg rounded" placeholder="Search"
-                    aria-label="Search" aria-describedby="basic-addon2" />
-                </div>
-                <p class="mb-0 d-flex flex-row align-self-center" style="color: #939597;"><span class="font-weight-bold pe-1">108 </span>results</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body p-4">
-                <h6 class="mt-3 mb-4" style="color: #939597;">Advanced search</h6>
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="dropdown">
-                      <a class="btn btn-outline-dark btn-rounded btn-lg btn-block dropdown-toggle" href="#" role="button"
-                        id="dropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
-                        Accessories
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                <div class="d-flex justify-content-between align-items-center mt-4">
-                  <div>
-                    <button type="button" class="btn btn-dark btn-rounded">Search</button>
-                    <button type="button" class="btn btn-link btn-rounded" style="color: #939597;" data-mdb-ripple-color="dark">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-</div>
-</div>
+      <h2 style="color:floralwhite;">PERPUSTAKAAN DIGITAL SPN POLDA JATIM</h2>
+  <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-success">SEARCH</button>
   </nav>
 </header>
 <main>
-  <?php
 
-while ($data= $sql->fetch_assoc()) {
-?>
-  <div class="row d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="col-6 flex-lg-equal bg-dark text-center text-white overflow-hidden">
-        <h2 class="display-5"><?php echo $data['judul'];?></h2>
+  <?php
+    $inc = 0;
+    while ($data= $sql->fetch_assoc()) {
+  ?>
+
+  <!-- Modal Search -->
+        <div id="id01" class="w3-modal">
+          <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+            <div class="w3-center"><br>
+              <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+            </div>
+            <form class="w3-container">
+              <div class="w3-section">
+                <label><b>Kategori</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Kategori">
+                <label><b>Penerbit</b></label>
+                <input class="w3-input w3-border" type="text" placeholder="Penerbit">
+                <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Search</button>
+              </div>
+            </form>
+
+            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+              <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+    <!-- Modal Detail View -->
+          <div id="detail" class="w3-modal">
+          <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:900px">
+            <div class="w3-center"><br>
+              <span onclick="document.getElementById('detail').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+            </div>
+            <div class="w3-row">
+              <div class="w3-quarter w3-container">
+              <img src="upload/<?php echo $data['fotobuku'];?>" width="200" height="200">
+              <br><br><br><br><br>
+              <label><a href='buku/<?php echo $data['buku'] ?>'><img src='buku/logopdf.png' width="90" height="90"></a><?php echo $data['buku'] ?></label> 
+              </div>
+              <div class="w3-threequarter w3-container" style="text-align:left; color: black;">
+                <label><b>Judul</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder='<?php echo $data['judul'];?>' disabled>
+                <label><b>Penerbit</b></label>
+                <input class="w3-input w3-border" type="text" placeholder='<?php echo $data['penerbit'];?>' disabled>
+                <label><b>Pengarang</b></label>
+                <input class="w3-input w3-border" type="text" placeholder='<?php echo $data['pengarang'];?>' disabled>
+                <label><b>Kategori</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder='<?php echo $data['kategori'];?>' disabled>
+                <label><b>isbn</b></label>
+                <input class="w3-input w3-border" type="text" placeholder='<?php echo $data['isbn'];?>' disabled>
+                <label><b>Lokasi</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder='<?php echo $data['lokasi'];?>' disabled>
+                <label><b>Tanggal input</b></label>
+                <input class="w3-input w3-border" type="text" placeholder='<?php echo $data['tgl_input'];?>' disabled>
+              </div>
+            </div>
+            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+              <button onclick="document.getElementById('detail').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Baca -->
+          <div id="baca" class="w3-modal">
+          <div class="w3-modal-content w3-card w3-animate-zoom" style="max-width:900px">
+            <div class="w3-center"><br>
+              <span onclick="document.getElementById('baca').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+            </div>
+            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+              <button onclick="document.getElementById('baca').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+  <?php if (($inc == 0) || ($inc % 4 == 0)){ ?>
+    <div class="row d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+  <?php } ?>
+    <div class="col-lg-3 flex-lg-equal bg-dark text-center text-white overflow-hidden">
+        <h4 class="display-5"><?php echo $data['judul'];?></h4>
         <p class="lead"><?php echo $data['kategori'];?></p>
         <img src="upload/<?php echo  $data['fotobuku'];?>" width="200" height="200">
-        <br><br><button type="button" class="btn btn-primary">BACA</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">detail</button>
-      </div>
+        <br><br><button onclick="document.getElementById('baca').style.display='block'" class="btn btn-primary">BACA</button>
+        <button onclick="document.getElementById('detail').style.display='block'" class="btn btn-success">detail</button>
     </div>
-  </div>
-   <?php  } ?>
+  <?php if (($inc == 0) || ($inc % 4 == 0)){ ?>
+    </div>
+  <?php $inc = 0; } ?>
+  <?php
+      $inc++;
+    }
+  ?>
 </main>
-    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>    
+
+    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/dist/js/kumpulanjs.js"></script>       
   </body>
 </html>
