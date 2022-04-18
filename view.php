@@ -103,30 +103,14 @@
           </div>
         </div>
 
-        <!-- Modal Baca -->
-          <div id="baca" class="w3-modal">
-          <div class="w3-modal-content w3-card w3-animate-zoom" style="max-width:1400px">
-            <div class="w3-center"><br>
-              <span onclick="document.getElementById('baca').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-            </div>
-            <div class="w3-row">
-              <div class="w3-container">
-                  <object type="application/pdf" src="buku/CamScanner 01-07-2022 11.07.pdf" width="1400" height="450"></object>
-              </div>
-            </div> 
-            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-              <button onclick="document.getElementById('baca').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-            </div>
-          </div>
-        </div>
-
 <!-- Main Page -->
     <div class="flex-lg-row my-lg-3 ps-lg-3">
-    <div class="col-lg-4 flex-column bg-dark text-center text-white overflow-hidden">
-        <h4 class="display-5"><?php echo $data['judul'];?></h4>
-        <p class="lead"><?php echo $data['kategori'];?></p>
+    <div class="col-lg-2 flex-column bg-dark me-md-3 text-center text-white overflow-hidden">
+        <h3><?php echo $data['judul'];?></h3>
         <img src="upload/<?php echo  $data['fotobuku'];?>" width="200" height="200">
-        <br><br><button onclick="document.getElementById('baca').style.display='block'" class="btn btn-primary">BACA</button>
+        <br><br><p>KATEGORI BUKU : </p>
+        <p><?php echo $data['kategori'];?></p>
+        <br><a href="http://localhost/perpustakaan/baca.html" class="btn btn-primary">BACA</a>
         <button onclick="document.getElementById('detail').style.display='block'" class="btn btn-success">detail</button>
     </div>
     </div>
