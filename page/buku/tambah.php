@@ -34,41 +34,35 @@
 
 <div class="panel panel-default">
 <div class="panel-heading">
-		Tambah Data Pengguna
+		Tambah Data Buku
  </div> 
 <div class="panel-body">
     <div class="row">
         <div class="col-md-12">
             <form method="POST" enctype="multipart/form-data" onsubmit="return validasi(this)" >
-    <div class="form-group">
+                <div class="form-group">
                     <label>Judul</label>
                     <input class="form-control" name="judul" id="judul" />
-                    
                 </div>
 
                 <div class="form-group">
                     <label>Pengarang</label>
                     <input class="form-control" name="pengarang" id="pengrang" />
-                    
                 </div>
 
                 <div class="form-group">
                     <label>Penerbit</label>
-                    <input class="form-control" name="penerbit" id="penerbit" />
-                    
+                    <input class="form-control" name="penerbit" id="penerbit" /> 
                 </div>
-
 
                 <div class="form-group">
                     <label>Kategori</label>
                     <input class="form-control" name="kategori" id="kategori" />
-                    
                 </div>
 
                 <div class="form-group">
                     <label>ISBN</label>
                     <input class="form-control" name="isbn" id="isbn" />
-                    
                 </div>
 
                 <div class="form-group">
@@ -96,7 +90,6 @@
               </div>  
                 
                 <div>
-                	
                 	<input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
                 </div>
          </div>
@@ -131,13 +124,12 @@
     if ($simpan) {
          if ($uploadfc) {
             if ($uploadbk) {
-        $sql = $koneksi->query("insert into tb_buku (judul, pengarang, penerbit, kategori, isbn, lokasi, fotobuku, buku)values('$judul', '$pengarang', '$penerbit', '$kategori', '$isbn', '$lokasi', '$fotobuku', '$buku')");
-                
+        $sql = $koneksi->query("insert into tb_buku (judul, pengarang, penerbit, kategori, isbn, lokasi, fotobuku, buku)values('$judul', '$pengarang', '$penerbit', '$kategori', '$isbn', '$lokasi', '$fotobuku', '$buku')"); 
             ?>
                 <script type="text/javascript">
                     
                     alert ("Data Berhasil Disimpan");
-                    window.location.href="?page=buku";
+                    //window.location.href="?page=buku";
 
                 </script>
             <?php        

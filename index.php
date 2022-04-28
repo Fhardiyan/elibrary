@@ -32,7 +32,7 @@
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.php">PERPUSTAKAAN</a> 
+                <a class="navbar-brand" href="index.php">eLIBRARY</a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
@@ -54,9 +54,6 @@ font-size: 16px;"><?php echo date('d-M-Y'); ?> &nbsp; <a href="logout.php" class
                             <li><a  href="?page=anggota"></i> Data Anggota</a></li>
                         </ul>
                      </li>
-                    <li>
-                        <a  href="?page=transaksi"><i class="fa fa-edit fa-2x"></i></i> Data Transaksi</a>
-                    </li>
 
                     <?php if ($_SESSION['admin']) {?> 
                      
@@ -68,7 +65,6 @@ font-size: 16px;"><?php echo date('d-M-Y'); ?> &nbsp; <a href="logout.php" class
                         <ul class="nav nav-second-level">
                             <li><a href="?page=buku&aksi=cetak"></i> Laporan Buku</a></li>
                             <li><a href="?page=anggota&aksi=cetak"></i> Laporan Anggota</a></li>
-                            <li><a href="?page=transaksi&aksi=cetak"></i> Laporan Transaksi</a></li>
                         </ul>
                      </li>
                     <?php } ?>     
@@ -122,18 +118,6 @@ font-size: 16px;"><?php echo date('d-M-Y'); ?> &nbsp; <a href="logout.php" class
                                     include "page/anggota/hapus.php";
                                 }elseif ($aksi== "cetak") {
                                     include "page/anggota/form_laporan_anggota.php";
-                                }
-                     		}elseif ($page == "transaksi" ) {
-                     			if ($aksi == "") {
-                     				include "page/transaksi/transaksi.php";
-                     			}elseif ($aksi == "tambah") {
-                                    include "page/transaksi/tambah.php";
-                                }elseif ($aksi == "kembali") {
-                                    include "page/transaksi/kembali.php";
-                                }elseif ($aksi == "perpanjang") {
-                                    include "page/transaksi/perpanjang.php";
-                                }elseif ($aksi== "cetak") {
-                                    include "page/transaksi/form_laporan_transaksi.php";
                                 }
                      		}elseif ($page == "pengguna" ) {
                                 if ($aksi == "") {

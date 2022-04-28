@@ -1,6 +1,6 @@
 <?php
     $koneksi = new mysqli("localhost","root","","db_perpustakaan");
-    $sql = $koneksi->query("select * from tb_buku");    
+    $sql = $koneksi->query("select * from tb_buku");
 ?>
 
 <!doctype html>
@@ -20,6 +20,7 @@
             <!-- W3 STYLES-->
    <link href="assets/css/w3.css"rel="stylesheet">
    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2020.css">
+
        <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
@@ -31,7 +32,6 @@
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
       <img src="images/lambang-spn.png" width="50" height="50" class="center logo">
       <h2 style="color:floralwhite;">PERPUSTAKAAN DIGITAL SPN POLDA JATIM</h2>
-  <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-success">SEARCH</button>
   </nav>
 </header>
 <main>
@@ -39,37 +39,6 @@
   <?php
     while ($data= $sql->fetch_assoc()) {
   ?>
-
-  <!-- Modal Search -->
-        <div id="id01" class="w3-modal">
-          <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
-            <div class="w3-container"><br>
-             <h2><center><b>Judul</b></center></h2>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="judul buku">
-            </div>
-            <div class="w3-half w3-container">
-                <label><b>Kategori</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Kategori">
-                <label><b>Penerbit</b></label>
-                <input class="w3-input w3-border" type="text" placeholder="Penerbit">
-                <label><b>ISBN</b></label>
-                <input class="w3-input w3-border" type="text" placeholder="ISBN">
-            </div>
-            <div class="w3-half w3-container">
-                <label><b>Pengarang</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Pengarang">
-                <label><b>Lokasi Buku</b></label>
-                <input class="w3-input w3-border" type="text" placeholder="Penerbit">
-                <label><b>Tanggal Input Buku</b></label>
-                <input class="w3-input w3-border" type="text" placeholder="Tanggal Input Buku">
-            </div>
-
-            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-               <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Search</button>
-              <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-            </div>
-          </div>
-        </div>
 
     <!-- Modal Detail View -->
           <div id="detail" class="w3-modal">
@@ -105,14 +74,14 @@
 
 <!-- Main Page -->
     <div class="flex-lg-row my-lg-3 ps-lg-3">
-    <div class="col-lg-2 flex-column bg-dark me-md-3 text-center text-white overflow-hidden">
-        <h3><?php echo $data['judul'];?></h3>
-        <img src="upload/<?php echo  $data['fotobuku'];?>" width="200" height="200">
-        <br><br><p>KATEGORI BUKU : </p>
-        <p><?php echo $data['kategori'];?></p>
-        <br><a href="http://localhost/perpustakaan/baca.html" class="btn btn-primary">BACA</a>
-        <button onclick="document.getElementById('detail').style.display='block'" class="btn btn-success">detail</button>
-    </div>
+      <div class="col-lg-3 bg-dark me-md-3 text-center text-white overflow-hidden">
+          <h4><?php echo $data['judul'];?></h4>
+          <img src="upload/<?php echo $data['fotobuku'];?>" width="150" height="200">
+          <br><br><p>KATEGORI BUKU : </p>
+          <p><?php echo $data['kategori'];?></p>
+          <br><a href="http://localhost/perpustakaan/baca.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-primary">BACA</a>
+          <button onclick="document.getElementById('detail').style.display='block'" class="btn btn-success">detail</button>
+      </div>
     </div>
   <?php
     }
